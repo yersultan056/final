@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=b07ac1e4-3ac3-4e1f-a440-3cca22ff0fbd"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/posts">Create Post</a>
+        <a href="/email">Send Email</a>
+        <a href="/bmi">Calculate BMI</a>
+        <a href="/home">Check Weather</a>
+        <a href="/qrcode">QR</a>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Weather App</h1>
+        <form id="weatherForm" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="city" id="cityInput" class="form-control" placeholder="Enter city name" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="result" id="weatherResult"></div>
+        <div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
+    </div>
+</div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

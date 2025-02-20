@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog App</title>
+  <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+  <div class="navbar">
+    <a href="/posts">Create Post</a>
+    <a href="/email">Send Email</a>
+    <a href="/bmi">Calculate BMI</a>
+    <a href="/home">Check Weather</a>
+    <a href="/qrcode">QR</a>
+  </div>
+
+  <h1>Blog App</h1>
+
+  <div class="create-blog">
+    <h2>Create Blog</h2>
+    <input id="title" placeholder="Title" />
+    <textarea id="body" placeholder="Body"></textarea>
+    <input id="author" placeholder="Author" />
+    <button onclick="createBlog()">Create</button>
+  </div>
+
+  <div class="search-blog">
+    <h2>Find Blog by ID</h2>
+    <input id="blogId" placeholder="Enter Blog ID" />
+    <button onclick="fetchSingleBlog()">Fetch Blog</button>
+    <div id="singleBlog"></div> <!-- Вывод найденного блога сразу под кнопкой -->
+  </div>
+
+  <div class="blogs-list">
+    <h2>All Blogs</h2>
+    <div id="blogs"></div>
+  </div>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/blogs';
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).replace(',', '');
+    }
+
+    async function fetchBlogs() {
+      const res = await fetch(apiUrl);
+      const blogs = await res.json();
+      document.getElementById('blogs').innerHTML = blogs.map(blog => `
+        <div class="blog">
+          <h3>${blog.title}</h3>
+          <p>${blog.body}</p>
+          <small>Author: ${blog.author}</small>
+          <small>ID: ${blog._id}</small>
+          <small>Created: ${formatDate(blog.createdAt)}</small>
+          <small>Updated: ${formatDate(blog.updatedAt)}</small>
+        </div>
+      `).join('');
+    }
+
+    async function fetchSingleBlog() {
+      const blogId = document.getElementById('blogId').value;
+      if (!blogId) return alert('Enter a blog ID');
+      
+      const res = await fetch(`${apiUrl}/${blogId}`);
+      if (!res.ok) return alert('Blog not found');
+      
+      const blog = await res.json();
+      document.getElementById('singleBlog').innerHTML = `
+        <div class="blog">
+          <h3>${blog.title}</h3>
+          <p>${blog.body}</p>
+          <small>Author: ${blog.author}</small>
+          <small>Created: ${formatDate(blog.createdAt)}</small>
+          <small>Updated: ${formatDate(blog.updatedAt)}</small>
+          <button class="edit-btn" onclick="editBlog('${blog._id}')">Edit</button>
+          <button class="delete-btn" onclick="deleteBlog('${blog._id}')">Delete</button>
+        </div>
+      `;
+    }
+
+    async function createBlog() {
+      const title = document.getElementById('title').value;
+      const body = document.getElementById('body').value;
+      const author = document.getElementById('author').value;
+      await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, body, author })
+      });
+      fetchBlogs();
+    }
+
+    fetchBlogs();
+  </script>
+</body>
+</html>

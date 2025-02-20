@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/posts">Create Post</a>
+        <a href="/email">Send Email</a>
+        <a href="/bmi">Calculate BMI</a>
+        <a href="/home">Check Weather</a>
+        <a href="/qrcode">QR</a>
+    </div>
+    <br>
+    <h2>Email</h2>
+    <br>
+    <button type="button" id="sendEmailButton" class="btn btn-success">Send Email</button>
+    <script>
+        document.getElementById('sendEmailButton').addEventListener('click', function() {
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: '230129@astanait.edu.kz',
+                    to: '230129@astanait.edu.kz',
+                    subject: 'Everything I Am, Kanye West song',
+                    text: "Damn, Here we go again, Common passed on this beat, I made it to a jam, Now everything I'm not made me everything I am"
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Email sent successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error sending email:', error);
+            });
+        });
+    </script>
+</body>
+</html>

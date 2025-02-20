@@ -1,0 +1,181 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #222;
+}
+
+.create-blog, .search-blog {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+.create-blog h2, .search-blog h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.create-blog input,
+.create-blog textarea,
+.search-blog input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.create-blog button,
+.search-blog button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.create-blog button:hover {
+    background-color: #0056b3;
+}
+
+.search-blog button:hover {
+    background-color: #0056b3;
+}
+
+.blogs-list {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.blog {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    text-align: left;
+    border-left: 5px solid #007bff;
+}
+
+.blog h3 {
+    margin: 0;
+    color: #222;
+    font-size: 22px;
+}
+
+.blog p {
+    color: #555;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.blog small {
+    display: block;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.blog .edit-btn {
+    background-color: #28a745;
+    border-radius: 6px;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+    transition: background 0.3s;
+}
+
+.blog .edit-btn:hover {
+    background-color: #218838;
+}
+
+.blog .delete-btn {
+    background-color: #dc3545;
+    border-radius: 6px;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.blog .delete-btn:hover {
+    background-color: #c82333;
+}
+
+.bmi-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.bmi-container h1,
+.bmi-container h3 {
+    color: #222;
+}
+
+.bmi-container label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.bmi-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.bmi-container button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.bmi-container button:hover {
+    background-color: #0056b3;
+}
