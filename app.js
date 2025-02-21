@@ -80,10 +80,16 @@ app.post('/weather', async (req, res) => {
     const city = req.body.city;
     try {
         const coords = await getCityCoordinates(city);
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-        const response = await axios.get(url);
-        const data = response.data;
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+        const weatherResponse = await axios.get(weatherUrl);
+        const data = weatherResponse.data;
+
+        const airQualityUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${API_KEY}`;
+        const airResponse = await axios.get(airQualityUrl);
+        const airData = airResponse.data.list[0]; 
+
         const news = await getCityNews(city);
+
         res.json({
             temperature: data.main.temp,
             description: data.weather[0].description,
@@ -96,12 +102,18 @@ app.post('/weather', async (req, res) => {
             country: data.sys.country,
             rain_volume: data.rain ? data.rain['3h'] : 0,
             cityCoordinates: coords,
+            air_quality: {
+                aqi: airData.main.aqi,
+                components: airData.components 
+            },
             news: news ? { title: news.title, description: news.description, url: news.url } : null
         });
     } catch (error) {
-        res.status(500).json({ error: 'Unable to fetch weather data' });
+        console.error(error);
+        res.status(500).json({ error: 'Unable to fetch weather and air quality data' });
     }
 });
+
 
 app.get('/bmi', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/views/bmi.html'));

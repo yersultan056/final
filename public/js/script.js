@@ -14,7 +14,16 @@ form.addEventListener('submit', async (e) => {
             body: new URLSearchParams({ city })
         });
         const data = await response.json();
+
         if (response.ok) {
+            const aqiDescriptions = [
+                "1 (Good)",
+                "2 (Fair)",
+                "3 (Moderate)",
+                "4 (Poor)",
+                "5 (Very Poor)"
+            ];
+
             resultDiv.innerHTML = `
                 <h2>${city}, ${data.country} <img src="https://flagcdn.com/w40/${data.country.toLowerCase()}.png" alt="Flag" style="width: 40px; height: 30px; margin-left: 10px;"></h2>
                 <p>${data.description}</p>
@@ -26,6 +35,8 @@ form.addEventListener('submit', async (e) => {
                 <p>Wind Speed: ${data.wind_speed} m/s</p>
                 <p>Coordinates: [${data.coordinates.lat}, ${data.coordinates.lon}]</p>
                 <p>Rain Volume (3h): ${data.rain_volume} mm</p>
+                <h3>Air Quality Index (AQI): ${data.air_quality.aqi}</h3>
+                <p>${aqiDescriptions[data.air_quality.aqi - 1]}</p>
             `;
 
             if (data.news) {
@@ -59,3 +70,4 @@ form.addEventListener('submit', async (e) => {
         resultDiv.innerHTML = `<p>Failed to fetch data</p>`;
     }
 });
+
