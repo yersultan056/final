@@ -16,7 +16,7 @@ form.addEventListener('submit', async (e) => {
         const data = await response.json();
         if (response.ok) {
             resultDiv.innerHTML = `
-                <h2>${city}, ${data.country}</h2>
+                <h2>${city}, ${data.country} <img src="https://flagcdn.com/w40/${data.country.toLowerCase()}.png" alt="Flag" style="width: 40px; height: 30px; margin-left: 10px;"></h2>
                 <p>${data.description}</p>
                 <img src="${data.icon}" alt="Weather icon">
                 <p>Temperature: ${data.temperature}°C</p>
